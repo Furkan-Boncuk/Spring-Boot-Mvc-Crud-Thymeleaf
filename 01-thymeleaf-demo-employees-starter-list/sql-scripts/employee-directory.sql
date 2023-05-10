@@ -1,28 +1,55 @@
-CREATE DATABASE  IF NOT EXISTS `employee_directory`;
-USE `employee_directory`;
 
 --
--- Table structure for table `employee`
+-- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `employee`;
-
-CREATE TABLE `employee` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `first_name` varchar(45) DEFAULT NULL,
-  `last_name` varchar(45) DEFAULT NULL,
-  `email` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
-
+CREATE TABLE users (
+                       username varchar(50) NOT NULL,
+                       password varchar(68) NOT NULL,
+                       enabled boolean NOT NULL,
+                       PRIMARY KEY (username)
+);
 --
--- Data for table `employee`
+-- Inserting data for table `users`
 --
 
-INSERT INTO `employee` VALUES 
-	(1,'Leslie','Andrews','leslie@luv2code.com'),
-	(2,'Emma','Baumgarten','emma@luv2code.com'),
-	(3,'Avani','Gupta','avani@luv2code.com'),
-	(4,'Yuri','Petrov','yuri@luv2code.com'),
-	(5,'Juan','Vega','juan@luv2code.com');
+INSERT INTO users(username, password, enabled)
+VALUES
+    ('john', '{bcrypt}$2a$12$RvNgQRbr6N79/0k1MMIK/e8XXV5nFC/fDr0TzNrRrn3mSaTWykZOy', true),
+    ('mary', '{bcrypt}$2a$12$RvNgQRbr6N79/0k1MMIK/e8XXV5nFC/fDr0TzNrRrn3mSaTWykZOy', true),
+    ('susan', '{bcrypt}$2a$12$RvNgQRbr6N79/0k1MMIK/e8XXV5nFC/fDr0TzNrRrn3mSaTWykZOy', true);
+
+--
+-- Table structure for table `authorities`
+--
+
+CREATE TABLE authorities (
+                             username varchar(50) NOT NULL,
+                             authority varchar(50) NOT NULL,
+                             CONSTRAINT authorities_pk PRIMARY KEY (username, authority),
+                             CONSTRAINT authorities_fk FOREIGN KEY (username) REFERENCES users (username)
+);
+
+--
+-- Inserting data for table `authorities`
+--
+
+INSERT INTO authorities(username, authority)
+VALUES
+    ('john','ROLE_EMPLOYEE'),
+    ('mary','ROLE_EMPLOYEE'),
+    ('mary','ROLE_MANAGER'),
+    ('susan','ROLE_EMPLOYEE'),
+    ('susan','ROLE_MANAGER'),
+    ('susan','ROLE_ADMIN');
+
+
+select * from  customer a  ;
+-- password = test123
+
+
+insert into customer(firstName, lastName) values ('furkan','boncuk');
+
+
+
 
