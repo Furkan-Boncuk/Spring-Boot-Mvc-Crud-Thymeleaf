@@ -1,4 +1,4 @@
-# Spring-Boot-Spring-MVC-CRUD-with-THYMELEAF
+# Spring-Boot-Mvc-Crud-with-Thymeleaf
 Projects of Chad Darby's udemy course.
 
 CRUD API
